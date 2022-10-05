@@ -1,0 +1,33 @@
+
+const CloudHomePage = require('../pageobjects/cloudHome.page')
+const SearchResultsPage = require('../pageobjects/searchResults.page')
+const CalculatorPage = require('../pageobjects/calculator.page')
+const Estimate = require('../pageobjects/estimate.page')
+
+describe('Hurt me plenty', function () {
+  it('Calculator', async function () {
+    await CloudHomePage.open()
+    await CloudHomePage.searchInput.click()
+    await CloudHomePage.searchInput
+      .keys(['Google Cloud Platform Pricing Calculator', 'Enter'])
+    await SearchResultsPage.resultsBox.waitForDisplayed()
+    await SearchResultsPage.searchResults[0].click()
+    await (await (await (await (await (await (await (await (await (await CalculatorPage.calcInit())
+      .setNumberOfInstances('4'))
+      .setOptionsInTo('series', 'N1'))
+      .setOptionsInTo('machineType', 'n1-standard-8 (vCPUs: 8, RAM: 30GB)'))
+      .clickAddGPUCheckbox())
+      .setOptionsInTo('GPUtype', 'NVIDIA Tesla P100'))
+      .setOptionsInTo('GPUnumber', '1'))
+      .setOptionsInTo('localSSD', '2x375 GB'))
+      .setOptionsInTo('dataCenterLocation', 'Frankfurt (europe-west3)'))
+      .setOptionsInTo('committedUsage', '1 Year')
+    await CalculatorPage.addToEstimateButton.click()
+    await expect(Estimate.vmClass).toHaveTextContaining('Regular')
+    await expect(Estimate.instanceType).toHaveTextContaining('n1-standard-8')
+    await expect(Estimate.region).toHaveTextContaining('Region: Frankfurt')
+    await expect(Estimate.localSSD).toHaveTextContaining('Local SSD: 2x375 GiB')
+    await expect(Estimate.commitmentTerm).toHaveTextContaining('Commitment term: 1 Year')
+    await expect(Estimate.finalPrice).toHaveTextContaining('USD 4,024.56 per 1 month')
+  })
+})

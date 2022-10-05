@@ -1,0 +1,22 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": [
+        "standard",
+        "eslint:recommended",
+        "plugin:wdio/recommended",
+        "plugin:mocha/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+    },
+    "plugins": [
+        "wdio",
+        "mocha"
+    ]
+}
