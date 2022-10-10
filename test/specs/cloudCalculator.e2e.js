@@ -9,7 +9,7 @@ const GeneratedEmailPage = require('../pageobjects/tempEmailGenerated.page')
 const MailBoxPage = require('../pageobjects/mailBox.page')
 
 describe('Calculator test', function () {
-  it('Hurt me plenty', async function () {
+  before(async function () {
     await CloudHomePage.open()
     await CloudHomePage.searchInput.click()
     await CloudHomePage.searchInput
@@ -27,6 +27,8 @@ describe('Calculator test', function () {
       .setOptionsInTo('dataCenterLocation', 'Frankfurt (europe-west3)'))
       .setOptionsInTo('committedUsage', '1 Year')
     await CalculatorPage.addToEstimateButton.click()
+  })
+  it('Hurt me plenty', async function () {
     await expect(Estimate.vmClass).toHaveTextContaining('Regular')
     await expect(Estimate.instanceType).toHaveTextContaining('n1-standard-8')
     await expect(Estimate.region).toHaveTextContaining('Frankfurt')
@@ -36,7 +38,6 @@ describe('Calculator test', function () {
   })
 
   it('Hardcore', async function () {
-    await Estimate.emailBtn.waitForDisplayed()
     await Estimate.emailBtn.click()
     await browser.newWindow('https://yopmail.com/')
     const openedPages = await browser.getWindowHandles()
