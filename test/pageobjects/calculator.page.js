@@ -35,27 +35,27 @@ class CalculatorPage extends Page {
   }
 
   get GPUtypeInput () {
-    return $('//span[contains(text(),"GPU type")]/ancestor::md-select')
+    return $('.//span[text()="GPU type"]/ancestor::md-select')
   }
 
   get GPUtypeOptions () {
-    return $$('//*[@id="select_container_464"]//md-option')
+    return $$('//*[contains(text(),"NVIDIA Tesla")]/ancestor::md-option')
   }
 
   get GPUnumberInput () {
-    return $('//*[@id="select_value_label_462"]')
+    return $('//label[text()="Number of GPUs"]/following-sibling::md-select')
   }
 
   get GPUnumberOptions () {
-    return $$('//*[@id="select_container_466"]//md-option')
+    return $$('//*[@class="md-select-menu-container md-active md-clickable"]//md-content//md-option')
   }
 
   get localSSDInput () {
-    return $('//*[@id="select_value_label_419"]')
+    return $('(//*[@placeholder="Local SSD"])[1]')
   }
 
   get localSSDOptions () {
-    return $$('//*[@id="select_container_421"]//md-option')
+    return $$('//*[@class="md-select-menu-container md-active md-clickable"]//md-content//md-option')
   }
 
   get dataCenterLocationInput () {
@@ -76,6 +76,10 @@ class CalculatorPage extends Page {
 
   get addToEstimateButton () {
     return $('.//*[@name="ComputeEngineForm"]//button[contains(text(),"Add to Estimate")]')
+  }
+
+  get opt () {
+    return $$('//*[@class="md-select-menu-container md-active md-clickable"]//md-content//md-option')
   }
 
   async calcInit () {
@@ -99,10 +103,10 @@ class CalculatorPage extends Page {
 
   async setOptionsInTo (element, value) {
     await this[`${element}Input`].click()
-    await this[`${element}Options`].forEach(el => el.waitForDisplayed())
+    // eslint-disable-next-line wdio/no-pause
+    await browser.pause(100)
     const options = await this[`${element}Options`].map(el => el.getText())
     await this[`${element}Options`][options.findIndex(el => el === value)].click()
-    await this[`${element}Options`].forEach(el => el.waitForDisplayed({ reverse: true }))
     return this
   }
 }

@@ -1,4 +1,5 @@
 
+// selectors should be fixed
 class Estimate {
   get vmClass () {
     return $('//*[@id="compute"]/md-list/md-list-item[4]/div')
@@ -22,6 +23,10 @@ class Estimate {
 
   get finalPrice () {
     return $('//*[@id="resultBlock"]/md-card/md-card-content/div/div/div/h2/b')
+  }
+
+  get emailBtn () {
+    return $('//*[@id="email_quote"]')
   }
 }
 
