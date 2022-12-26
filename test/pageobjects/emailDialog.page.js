@@ -6,7 +6,7 @@ class EmailDialog {
 
   get emailInput () {
     return $('//*[@type="email"]')
-    // return this.dialogContainer.$$('input')
+    // return this.dialogContainer.$('input')
   }
 
   get sendEmailBtn () {
