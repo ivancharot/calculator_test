@@ -22,11 +22,11 @@ class Estimate {
   }
 
   get finalPrice () {
-    return $('//*[@id="resultBlock"]/md-card/md-card-content/div/div/div/h2/b')
+    return $('//*[@id="resultBlock"]//div[@class="cpc-cart-total"]//b')
   }
 
   get emailBtn () {
-    return $('//*[@id="email_quote"]')
+    return $('//*[@title="Email Estimate"]')
   }
 }
 

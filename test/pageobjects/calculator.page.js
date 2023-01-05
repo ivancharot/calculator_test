@@ -91,7 +91,7 @@ class CalculatorPage extends Page {
 
   async setNumberOfInstances (number) {
     await this.numberOfInstancesInput.click()
-    await this.numberOfInstancesInput.keys(number)
+    await browser.keys(number)
     return this
   }
 

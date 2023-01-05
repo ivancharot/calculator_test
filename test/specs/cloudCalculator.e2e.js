@@ -12,8 +12,7 @@ describe('Calculator test', function () {
   before(async function () {
     await CloudHomePage.open()
     await CloudHomePage.searchInput.click()
-    await CloudHomePage.searchInput
-      .keys(['Google Cloud Platform Pricing Calculator', 'Enter'])
+    await browser.keys(['Google Cloud Platform Pricing Calculator', 'Enter'])
     await SearchResultsPage.resultsBox.waitForDisplayed()
     await SearchResultsPage.searchResults[0].click()
     await (await (await (await (await (await (await (await (await (await CalculatorPage.calcInit())
@@ -45,7 +44,8 @@ describe('Calculator test', function () {
     await GeneratedEmailPage.copyEmailBtn.click()
     await browser.switchToWindow(openedPages[0])
     await CalculatorPage.calcInit()
-    await EmailDialog.emailInput.addValue(['Shift', 'Insert'])
+    await EmailDialog.emailInput.click()
+    await browser.keys(['Shift', 'Insert'])
     await EmailDialog.sendEmailBtn.click()
     await EmailDialog.dialogContainer.waitForDisplayed({ reverse: true })
     await browser.switchToWindow(openedPages[1])
